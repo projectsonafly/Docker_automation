@@ -1,0 +1,86 @@
+# !/bin/bash 
+#  logo with docker starts here 
+colorred="\033[31m"
+colorpowder_blue="\033[1;36m" #with bold
+colorblue="\033[34m"
+colornormal="\033[0m"
+colorwhite="\033[97m"
+colorlightgrey="\033[90m"
+printf "       /\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\\\___/ ===       \n"
+printf "  ${colorblue}~~~ ${colorlightgrey}{${colorblue}~~ ~~~~ ~~~ ~~~~ ~~ ~ ${colorlightgrey}/  ===- ${colorblue}~~~${colorlightgrey}\n"
+printf "       \\\______${colorwhite} o ${colorlightgrey}         __/           \n"
+printf "         \\\    \\\        __/            \n"
+printf "          \\\____\\\______/               \n"
+
+
+#  logo with docker ends here
+# Linking version download with new variable
+#LINK_TO_SPADEVERSION1=<link1>
+#LINK_TO_SPADEVERSION2=<link2>
+#LINK_TO_SPADEVERSION3=<link3>
+
+# Take user Input 
+echo "Hi there, Welcome to Sapde - Enter your name please: "; read a 
+
+echo "Good day $a "
+
+  
+# Input type of version 
+echo "Select version:"
+echo "Enter '1' for latest-version: 1"
+echo "Enter '2' for version: 2"
+echo "Enter '3' for version:3"
+echo "Enter '0' to Exit "
+echo "Please Enter a value: "; read ch 
+  
+# Navigating user to download selected version
+case $ch in
+  1)res=`echo $(wget $LINK_TO_SPADEVERSION1;wget $LINK_TO_MARIADB)` 
+  ;; 
+  2)res=`echo $(wget $LINK_TO_SPADEVERSION2;wget $LINK_TO_MARIADB)` 
+  ;; 
+  3)res=`echo $(wget --user=narpothu --password=AKCp5bCB6jz3qM5GK9VVxCsfbYBWQokYenDTDWqL8H8qSE1dELsZWT7vFP4LVqe3uVR772MJU $LINK_TO_SPADEVERSION11;wget --user=narpothu --password=AKCp5bCB6jz3qM5GK9VVxCsfbYBWQokYenDTDWqL8H8qSE1dELsZWT7vFP4LVqe3uVR772MJU $LINK_TO_MARIADB)` 
+  ;; 
+  0)res=`echo "Good bye $a"`
+  ;;
+esac
+echo "Downloading Spade version $ch ...... : $res"
+
+
+# Now loading downloaded images with docker load
+echo "Image is loading to docker ..........."
+
+echo "$(docker load -i dockerimage.tar)"
+# 7 seconds delay to implement next operation
+sleep 7
+
+echo "$(docker load -i dockerimage.tar)"
+# 7 seconds delay again to implement next operation
+sleep 7
+# composing downloaded images
+# 
+echo "$(docker-compose up -d)"
+# 10 seconds delay to implement next operation 
+sleep 10
+echo "$(docker cp file.fmt $(docker ps |grep -i containername | awk '{print $1}'):/tmp) && $(docker exec -it $(docker ps |grep -i maria |awk '{print $1}') /bin/bash -c 'mysql -u root -padmin  < /tmp/<myfile>.sql') )"
+# 8 seconds delay to implement next operation
+sleep 8
+
+echo "$(docker load -i <myfile>.tar)"
+sleep 5
+
+echo "$(docker run --detach <myimage>)"
+sleep 3
+echo "*******************END   : SPADE APP SERVER SET UP COMPLETED ***************************"
+
+echo "################################################- Monitoring all container process -############################################################################################################"
+# monitoring the process running by docker 
+echo "docker top $(docker ps |awk '{print $1}')"
+
+echo "################################################- Running Containers -############################################################################################################"
+
+echo "docker ps"
+
+
+
+
